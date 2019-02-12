@@ -1,0 +1,52 @@
+diff --git wordpress-orig/wp-admin/includes/file.php wordpress/wp-admin/includes/file.php
+index efc846b..7a30e24 100644
+--- wordpress-orig/wp-admin/includes/file.php
++++ wordpress/wp-admin/includes/file.php
+@@ -864,7 +864,7 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
+ 	}
+ 
+ 	// Set correct file permissions.
+-	$stat  = stat( dirname( $new_file ) );
++	$stat = stat( trailingslashit( dirname( $new_file ) ) );
+ 	$perms = $stat['mode'] & 0000666;
+ 	@ chmod( $new_file, $perms );
+ 
+diff --git wordpress-orig/wp-includes/class-wp-image-editor-gd.php wordpress/wp-includes/class-wp-image-editor-gd.php
+index 72fb04e..a1469ae 100644
+--- wordpress-orig/wp-includes/class-wp-image-editor-gd.php
++++ wordpress/wp-includes/class-wp-image-editor-gd.php
+@@ -413,7 +413,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
+ 		}
+ 
+ 		// Set correct file permissions
+-		$stat  = stat( dirname( $filename ) );
++		$stat = stat( trailingslashit( dirname( $filename ) ) );
+ 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
+ 		@ chmod( $filename, $perms );
+ 
+diff --git wordpress-orig/wp-includes/class-wp-image-editor-imagick.php wordpress/wp-includes/class-wp-image-editor-imagick.php
+index abb2150..16e9265 100644
+--- wordpress-orig/wp-includes/class-wp-image-editor-imagick.php
++++ wordpress/wp-includes/class-wp-image-editor-imagick.php
+@@ -636,7 +636,7 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
+ 		}
+ 
+ 		// Set correct file permissions
+-		$stat  = stat( dirname( $filename ) );
++		$stat = stat( trailingslashit ( dirname( $filename ) ) );
+ 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
+ 		@ chmod( $filename, $perms );
+ 
+diff --git wordpress-orig/wp-includes/functions.php wordpress/wp-includes/functions.php
+index 214c134..fa32bc3 100644
+--- wordpress-orig/wp-includes/functions.php
++++ wordpress/wp-includes/functions.php
+@@ -2402,7 +2402,7 @@ function wp_upload_bits( $name, $deprecated, $bits, $time = null ) {
+ 	clearstatcache();
+ 
+ 	// Set correct file permissions
+-	$stat  = @ stat( dirname( $new_file ) );
++	$stat = @ stat( trailingslashit (dirname( $new_file ) ) );
+ 	$perms = $stat['mode'] & 0007777;
+ 	$perms = $perms & 0000666;
+ 	@ chmod( $new_file, $perms );
