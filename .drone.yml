@@ -1,0 +1,14 @@
+pipeline:
+  publish:
+    image: quay.io/presslabs/bfc:latest
+    pull: true
+    environment:
+      - ORIGIN_REPO=https://github.com/presslabs/wordpress.git
+    commands:
+      - apt-get update
+      - apt-get install -y --no-install-recommends apt-transport-https
+      - curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+      - echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
+      - apt-get update
+      - apt-get install -y --no-install-recommends php7.1-cli
+      - make

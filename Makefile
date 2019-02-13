@@ -1,7 +1,7 @@
 SYNC_BRANCHES ?= master 5.0-branch
 SYNC_TAGS ?= $(shell ./tags.php)
-UPSTREAM_REPO = https://github.com/wordpress/wordpress.git
-ORIGIN_REPO = git@github.com:presslabs/wordpress.git
+UPSTREAM_REPO ?= https://github.com/wordpress/wordpress.git
+ORIGIN_REPO ?= git@github.com:presslabs/wordpress.git
 
 .PHONY: sync
 sync: fetch # we need to re-spawn make in order to get the fetched tag list
