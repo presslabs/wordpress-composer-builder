@@ -1,4 +1,4 @@
-SYNC_BRANCHES ?= master 5.0-branch
+SYNC_BRANCHES ?= master 5.0-branch 5.1-branch
 SYNC_TAGS ?= $(shell ./tags.php)
 UPSTREAM_REPO ?= https://github.com/wordpress/wordpress.git
 ORIGIN_REPO ?= git@github.com:presslabs/wordpress.git
