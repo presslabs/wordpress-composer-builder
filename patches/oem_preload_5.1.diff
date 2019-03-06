@@ -87,7 +87,7 @@ index 245ecb1..cdc5a8b 100644
 +	if ( file_exists( WP_OEM_DIR . '/mu-plugin.php' ) ) {
 +		$mu_plugins[] = WP_OEM_DIR . '/mu-plugin.php';
 +	}
-+	if ( !is_dir( WPMU_PLUGIN_DIR ) )
++	if ( !is_dir( WPMU_PLUGIN_DIR ) ) {
  		return $mu_plugins;
  	}
  	if ( ! $dh = opendir( WPMU_PLUGIN_DIR ) ) {
