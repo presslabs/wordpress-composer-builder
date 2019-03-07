@@ -4,16 +4,10 @@ pipeline:
     pull: true
     environment:
       - ORIGIN_REPO=https://github.com/presslabs/wordpress.git
-      - GH_USER=presslabs-bot
-      - GH_EMAIL=bot@presslabs.com
-    secrets: [gh_token]
+      - GIT_USER=presslabs-bot
+      - GIT_EMAIL=bot@presslabs.com
+    secrets: [GIT_PASSWORD]
     commands:
-      - apt-get update
-      - apt-get install -y --no-install-recommends apt-transport-https
-      - curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-      - echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
-      - apt-get update
-      - apt-get install -y --no-install-recommends php7.1-cli
       - ./setup-github-credentials.sh
       - make
     when:
