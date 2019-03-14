@@ -1,17 +1,16 @@
 diff --git wordpress-orig/wp-includes/functions.php wordpress/wp-includes/functions.php
-index 098079577e..2574ba6c32 100644
+index 58a00528a9..48da45c80f 100644
 --- wordpress-orig/wp-includes/functions.php
 +++ wordpress/wp-includes/functions.php
-@@ -6175,10 +6175,19 @@ function wp_delete_file( $file ) {
+@@ -5602,10 +5602,19 @@ function wp_delete_file( $file ) {
   * @return bool True on success, false on failure.
   */
  function wp_delete_file_from_directory( $file, $directory ) {
--	$real_file      = realpath( wp_normalize_path( $file ) );
+-	$real_file = realpath( wp_normalize_path( $file ) );
 -	$real_directory = realpath( wp_normalize_path( $directory ) );
 +	$file_path      = wp_normalize_path( $file ) ;
 +	$directory_path = wp_normalize_path( $directory ) ;
-
--	if ( false === $real_file || false === $real_directory || strpos( wp_normalize_path( $real_file ), trailingslashit( wp_normalize_path( $real_directory ) ) ) !== 0 ) {
++
 +	if ( ! wp_is_stream( $file ) ) {
 +		$real_file      = realpath( $file_path );
 +		$real_directory = realpath( $directory_path );
@@ -20,7 +19,8 @@ index 098079577e..2574ba6c32 100644
 +			return false;
 +		}
 +	}
-+
+
+-	if ( false === $real_file || false === $real_directory || strpos( wp_normalize_path( $real_file ), trailingslashit( wp_normalize_path( $real_directory ) ) ) !== 0 ) {
 +	if ( strpos( $file_path, trailingslashit( $directory_path ) ) !== 0 ) {
  		return false;
  	}
