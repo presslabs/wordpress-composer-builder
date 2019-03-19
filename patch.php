@@ -4,6 +4,8 @@ define('PATCHES_DIR', __DIR__ . '/patches' );
 require_once __DIR__ . '/wordpress/wp-includes/version.php';
 chdir(__DIR__ . "/wordpress");
 
+patch('real_path_5.1.diff', '5.1-rc1');
+patch('real_path_5.0.diff', '5.0', '5.1-rc1');
 patch('oem_preload_5.1.diff', '5.1-rc1');
 patch('oem_preload_5.0.diff', '5.0', '5.1-rc1');
 patch('imagick_5.1.diff', '5.1-rc1');
